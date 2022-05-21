@@ -3,7 +3,7 @@ import time
 from kafka import KafkaProducer
 
 def main():
-    producer = KafkaProducer(bootstrap_servers=['192.168.1.17:9092'])
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
     csv_data_file = open('../resources/data/garden-sensor-data.json', 'r')
     lines = csv_data_file.readlines()
