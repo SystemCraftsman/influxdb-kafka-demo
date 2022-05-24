@@ -1,5 +1,8 @@
-import random
+import time
 import json
+import random
+
+from kafka import KafkaProducer
 
 
 def random_temp_cels():
@@ -24,11 +27,15 @@ def get_json_data():
 
     return json.dumps(data) 
 
-file_object = open('garden-sensor-data.json', 'a')
+def main():
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
-for i in range(20000):
-    json_data = get_json_data()
-    file_object.write(f"{json_data}\n")
-    print(json_data)
+    for _ in range(20000):
+        json_data = get_json_data()
+        producer.send('garden_sensor_data', bytes(f'{json_data}','UTF-8'))
+        print(f"Sensor data is sent: {json_data}")
+        time.sleep(5)
 
-file_object.close()
+
+if __name__ == "__main__":
+    main()

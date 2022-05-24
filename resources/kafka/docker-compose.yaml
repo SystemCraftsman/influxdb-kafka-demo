@@ -31,9 +31,4 @@ services:
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
-  influxdb:
-      container_name: influxdb
-      ports:
-          - '8086:8086'
-      image: 'docker.io/influxdb:2.2.0'
 
